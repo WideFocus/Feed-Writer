@@ -14,7 +14,7 @@ use WideFocus\Feed\Writer\WriterInterface;
 use WideFocus\Feed\Writer\WriterLayoutInterface;
 
 /**
- * @covers \WideFocus\Feed\Writer\AbstractWriterFactory
+ * @coversDefaultClass \WideFocus\Feed\Writer\AbstractWriterFactory
  */
 class AbstractWriterFactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -26,7 +26,7 @@ class AbstractWriterFactoryTest extends PHPUnit_Framework_TestCase
      *
      * @return WriterInterface
      *
-     * @covers \WideFocus\Feed\Writer\AbstractWriterFactory::createWriter
+     * @covers ::createWriter
      *
      * @dataProvider writerDataProvider
      */

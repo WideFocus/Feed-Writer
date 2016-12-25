@@ -11,7 +11,7 @@ use PHPUnit_Framework_TestCase;
 use WideFocus\Feed\Writer\WriterField;
 
 /**
- * @covers \WideFocus\Feed\Writer\WriterField
+ * @coversDefaultClass \WideFocus\Feed\Writer\WriterField
  */
 class WriterFieldTest extends PHPUnit_Framework_TestCase
 {
@@ -26,7 +26,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider constructorDataProvider
      *
-     * @covers \WideFocus\Feed\Writer\WriterField::__construct
+     * @covers ::__construct
      */
     public function testConstructor(string $name, string $label, callable $filter = null): WriterField
     {
@@ -41,7 +41,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider constructorDataProvider
      *
-     * @covers \WideFocus\Feed\Writer\WriterField::getName
+     * @covers ::getName
      */
     public function testGetName(string $name, string $label)
     {
@@ -57,7 +57,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider constructorDataProvider
      *
-     * @covers \WideFocus\Feed\Writer\WriterField::getValue
+     * @covers ::getLabel
      */
     public function testGetLabel(string $name, string $label)
     {
@@ -74,7 +74,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
      *
      * @dataProvider constructorDataProvider
      *
-     * @covers \WideFocus\Feed\Writer\WriterField::getValue
+     * @covers ::getValue
      */
     public function testGetValue(string $name, string $label, callable $filter = null)
     {

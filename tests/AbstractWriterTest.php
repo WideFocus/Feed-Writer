@@ -27,7 +27,7 @@ class AbstractWriterTest extends PHPUnit_Framework_TestCase
      *
      * @return AbstractWriter
      *
-     * @covers \WideFocus\Feed\Writer\AbstractWriter::__construct
+     * @covers ::__construct()
      *
      * @dataProvider constructorDataProvider
      */

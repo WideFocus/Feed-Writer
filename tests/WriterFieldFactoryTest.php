@@ -11,7 +11,7 @@ use WideFocus\Feed\Writer\WriterFieldFactory;
 use WideFocus\Feed\Writer\WriterFieldInterface;
 
 /**
- * @covers \WideFocus\Feed\Writer\WriterFieldFactory
+ * @coversDefaultClass \WideFocus\Feed\Writer\WriterFieldFactory
  */
 class WriterFieldFactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -24,7 +24,7 @@ class WriterFieldFactoryTest extends PHPUnit_Framework_TestCase
      *
      * @return WriterFieldInterface
      *
-     * @covers \WideFocus\Feed\Writer\WriterFieldFactory::createField
+     * @covers ::createField
      *
      * @dataProvider fieldDataProvider
      */
