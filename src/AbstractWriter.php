@@ -31,8 +31,8 @@ abstract class AbstractWriter implements WriterInterface
      */
     public function __construct(array $fields, WriterLayoutInterface $layout)
     {
-        $this->fields = $fields;
-        $this->layout = $layout;
+        $this->setFields($fields);
+        $this->setLayout($layout);
     }
 
     /**
@@ -77,6 +77,18 @@ abstract class AbstractWriter implements WriterInterface
     abstract protected function finish();
 
     /**
+     * Set the fields.
+     *
+     * @param WriterFieldInterface[] $fields
+     *
+     * @return void
+     */
+    protected function setFields(array $fields)
+    {
+        $this->fields = $fields;
+    }
+
+    /**
      * Get the fields.
      *
      * @return WriterFieldInterface[]
@@ -87,7 +99,19 @@ abstract class AbstractWriter implements WriterInterface
     }
 
     /**
-     * Get the fields.
+     * Set the layout.
+     *
+     * @param WriterLayoutInterface $layout
+     *
+     * @return void
+     */
+    protected function setLayout(WriterLayoutInterface $layout)
+    {
+        $this->layout = $layout;
+    }
+
+    /**
+     * Get the layout.
      *
      * @return WriterLayoutInterface
      */

@@ -13,12 +13,13 @@ use WideFocus\Feed\Writer\WriterFieldInterface;
 use WideFocus\Feed\Writer\WriterLayoutInterface;
 
 /**
- * @covers \WideFocus\Feed\Writer\AbstractWriter
+ * @coversDefaultClass \WideFocus\Feed\Writer\AbstractWriter
  */
 class AbstractWriterTest extends PHPUnit_Framework_TestCase
 {
     use CommonMocksTrait;
     use IterationMockTrait;
+    use ProtectedMethodTrait;
 
     /**
      * @param WriterFieldInterface[] $fields
@@ -41,7 +42,43 @@ class AbstractWriterTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      *
-     * @covers \WideFocus\Feed\Writer\AbstractWriter::write
+     * @covers ::setFields()
+     * @covers ::getFields()
+     *
+     * @dataProvider constructorDataProvider
+     */
+    public function testGetSetFields(array $fields, WriterLayoutInterface $layout)
+    {
+        $writer = $this->createWriter($fields, $layout);
+        $method = $this->getProtectedMethod(AbstractWriter::class, 'getFields');
+        $this->assertSame($fields, $method->invoke($writer));
+    }
+
+    /**
+     * @param WriterFieldInterface[] $fields
+     * @param WriterLayoutInterface  $layout
+     *
+     * @return void
+     *
+     * @covers ::setLayout()
+     * @covers ::getLayout()
+     *
+     * @dataProvider constructorDataProvider
+     */
+    public function testGetSetLayout(array $fields, WriterLayoutInterface $layout)
+    {
+        $writer = $this->createWriter($fields, $layout);
+        $method = $this->getProtectedMethod(AbstractWriter::class, 'getLayout');
+        $this->assertSame($layout, $method->invoke($writer));
+    }
+
+    /**
+     * @param WriterFieldInterface[] $fields
+     * @param WriterLayoutInterface  $layout
+     *
+     * @return void
+     *
+     * @covers ::write
      *
      * @dataProvider constructorDataProvider
      */
