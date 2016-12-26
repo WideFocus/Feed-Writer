@@ -6,11 +6,10 @@
 
 namespace WideFocus\Feed\Writer\Tests;
 
+use ArrayIterator;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use WideFocus\Feed\Writer\AbstractWriter;
-use WideFocus\Feed\Writer\WriterFieldInterface;
-use WideFocus\Feed\Writer\WriterLayoutInterface;
 
 /**
  * @coversDefaultClass \WideFocus\Feed\Writer\AbstractWriter
@@ -18,7 +17,6 @@ use WideFocus\Feed\Writer\WriterLayoutInterface;
 class AbstractWriterTest extends PHPUnit_Framework_TestCase
 {
     use CommonMocksTrait;
-    use IterationMockTrait;
     use ProtectedMethodTrait;
 
     /**
@@ -54,9 +52,6 @@ class AbstractWriterTest extends PHPUnit_Framework_TestCase
             $this->createFeedItemMock()
         ];
 
-        $iterator = $this->createIteratorMock();
-        $this->mockIteration($iterator, $items);
-
         $writer->expects($this->once())
             ->method('initialize');
 
@@ -69,7 +64,7 @@ class AbstractWriterTest extends PHPUnit_Framework_TestCase
         $writer->expects($this->once())
             ->method('finish');
 
-        $writer->write($iterator);
+        $writer->write(new ArrayIterator($items));
     }
 
     /**

@@ -7,7 +7,6 @@
 namespace WideFocus\Feed\Writer\Tests;
 
 use ArrayAccess;
-use Iterator;
 use PHPUnit_Framework_MockObject_MockObject;
 use WideFocus\Feed\Writer\Tests\Stubs\FilterStub;
 use WideFocus\Feed\Writer\WriterFieldInterface;
@@ -51,10 +50,9 @@ trait CommonMocksTrait
     }
 
     /**
-     * @return Iterator|PHPUnit_Framework_MockObject_MockObject
+     * @param string $originalClassName
+     *
+     * @return PHPUnit_Framework_MockObject_MockObject
      */
-    protected function createIteratorMock(): Iterator
-    {
-        return $this->createMock(Iterator::class);
-    }
+    abstract protected function createMock($originalClassName);  // @codingStandardsIgnoreLine
 }
