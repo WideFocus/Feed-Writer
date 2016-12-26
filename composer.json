@@ -11,11 +11,18 @@
             "email": "contact@widefocus.net"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://bitbucket.org/widefocus/filter"
+        }
+    ],
     "require": {
         "php": "^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.5"
+        "phpunit/phpunit": "^5.5",
+        "widefocus/filter": "dev-master"
     },
     "autoload": {
         "psr-4": {
