@@ -16,24 +16,7 @@ abstract class AbstractWriter implements WriterInterface
     /**
      * @var WriterFieldInterface[]
      */
-    private $fields;
-
-    /**
-     * @var WriterLayoutInterface
-     */
-    private $layout;
-
-    /**
-     * Constructor.
-     *
-     * @param WriterFieldInterface[] $fields
-     * @param WriterLayoutInterface  $layout
-     */
-    public function __construct(array $fields, WriterLayoutInterface $layout)
-    {
-        $this->setFields($fields);
-        $this->setLayout($layout);
-    }
+    private $fields = [];
 
     /**
      * Write the feed.
@@ -51,6 +34,29 @@ abstract class AbstractWriter implements WriterInterface
         $this->finish();
 
         return $this;
+    }
+
+    /**
+     * Set the writer fields.
+     *
+     * @param WriterFieldInterface[] $fields
+     *
+     * @return WriterInterface
+     */
+    public function setFields(array $fields): WriterInterface
+    {
+        $this->fields = $fields;
+        return $this;
+    }
+
+    /**
+     * Get the fields.
+     *
+     * @return WriterFieldInterface[]
+     */
+    protected function getFields(): array
+    {
+        return $this->fields;
     }
 
     /**
@@ -75,48 +81,4 @@ abstract class AbstractWriter implements WriterInterface
      * @return void
      */
     abstract protected function finish();
-
-    /**
-     * Set the fields.
-     *
-     * @param WriterFieldInterface[] $fields
-     *
-     * @return void
-     */
-    protected function setFields(array $fields)
-    {
-        $this->fields = $fields;
-    }
-
-    /**
-     * Get the fields.
-     *
-     * @return WriterFieldInterface[]
-     */
-    protected function getFields(): array
-    {
-        return $this->fields;
-    }
-
-    /**
-     * Set the layout.
-     *
-     * @param WriterLayoutInterface $layout
-     *
-     * @return void
-     */
-    protected function setLayout(WriterLayoutInterface $layout)
-    {
-        $this->layout = $layout;
-    }
-
-    /**
-     * Get the layout.
-     *
-     * @return WriterLayoutInterface
-     */
-    protected function getLayout(): WriterLayoutInterface
-    {
-        return $this->layout;
-    }
 }

@@ -22,69 +22,32 @@ class AbstractWriterTest extends PHPUnit_Framework_TestCase
     use ProtectedMethodTrait;
 
     /**
-     * @param WriterFieldInterface[] $fields
-     * @param WriterLayoutInterface  $layout
-     *
-     * @return AbstractWriter
-     *
-     * @covers ::__construct()
-     *
-     * @dataProvider constructorDataProvider
-     */
-    public function testConstructor(array $fields, WriterLayoutInterface $layout): AbstractWriter
-    {
-        return $this->createWriter($fields, $layout);
-    }
-
-    /**
-     * @param WriterFieldInterface[] $fields
-     * @param WriterLayoutInterface  $layout
-     *
      * @return void
      *
      * @covers ::setFields()
      * @covers ::getFields()
-     *
-     * @dataProvider constructorDataProvider
      */
-    public function testGetSetFields(array $fields, WriterLayoutInterface $layout)
+    public function testGetSetFields()
     {
-        $writer = $this->createWriter($fields, $layout);
+        $fields = [
+            $this->createWriterFieldMock()
+        ];
+
+        $writer = $this->createWriter();
+
+        $writer->setFields($fields);
         $method = $this->getProtectedMethod(AbstractWriter::class, 'getFields');
         $this->assertSame($fields, $method->invoke($writer));
     }
 
     /**
-     * @param WriterFieldInterface[] $fields
-     * @param WriterLayoutInterface  $layout
-     *
-     * @return void
-     *
-     * @covers ::setLayout()
-     * @covers ::getLayout()
-     *
-     * @dataProvider constructorDataProvider
-     */
-    public function testGetSetLayout(array $fields, WriterLayoutInterface $layout)
-    {
-        $writer = $this->createWriter($fields, $layout);
-        $method = $this->getProtectedMethod(AbstractWriter::class, 'getLayout');
-        $this->assertSame($layout, $method->invoke($writer));
-    }
-
-    /**
-     * @param WriterFieldInterface[] $fields
-     * @param WriterLayoutInterface  $layout
-     *
      * @return void
      *
      * @covers ::write
-     *
-     * @dataProvider constructorDataProvider
      */
-    public function testWrite(array $fields, WriterLayoutInterface $layout)
+    public function testWrite()
     {
-        $writer = $this->createWriter($fields, $layout);
+        $writer = $this->createWriter();
 
         $items = [
             $this->createFeedItemMock(),
@@ -110,31 +73,12 @@ class AbstractWriterTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param WriterFieldInterface[] $fields
-     * @param WriterLayoutInterface  $layout
-     *
      * @return AbstractWriter|PHPUnit_Framework_MockObject_MockObject
      */
-    protected function createWriter(array $fields, WriterLayoutInterface $layout): AbstractWriter
+    protected function createWriter(): AbstractWriter
     {
         return $this->getMockForAbstractClass(
-            AbstractWriter::class,
-            [$fields, $layout]
+            AbstractWriter::class
         );
-    }
-
-    /**
-     * @return array
-     */
-    public function constructorDataProvider(): array
-    {
-        return [
-            [
-                [
-                    $this->createWriterFieldMock()
-                ],
-                $this->createWriterLayoutMock()
-            ]
-        ];
     }
 }

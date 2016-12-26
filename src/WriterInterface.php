@@ -22,4 +22,13 @@ interface WriterInterface
      * @return WriterInterface
      */
     public function write(Iterator $dataIterator): WriterInterface;
+
+    /**
+     * Set the writer fields.
+     *
+     * @param WriterFieldInterface[] $fields
+     *
+     * @return WriterInterface
+     */
+    public function setFields(array $fields): WriterInterface;
 }
