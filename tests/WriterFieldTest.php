@@ -96,8 +96,12 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
 
         if ($filter !== null) {
             $filter->expects($this->once())
+                ->method('setContext')
+                ->with($item);
+
+            $filter->expects($this->once())
                 ->method('__invoke')
-                ->with($value, $item)
+                ->with($value)
                 ->willReturn($filtered);
         }
 

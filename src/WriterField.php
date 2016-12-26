@@ -76,7 +76,13 @@ class WriterField implements WriterFieldInterface
             : '';
 
         if (is_callable($this->filter)) {
-            $value = call_user_func($this->filter, $value, $item);
+            if (is_object($this->filter)
+                && is_callable([$this->filter, 'setContext'])
+            ) {
+                call_user_func([$this->filter, 'setContext'], $item);
+            }
+
+            $value = call_user_func($this->filter, $value);
         }
 
         return $value;

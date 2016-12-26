@@ -11,12 +11,20 @@ use ArrayAccess;
 class FilterStub
 {
     /**
-     * @param mixed       $value
-     * @param ArrayAccess $item
+     * @param mixed $value
      *
      * @return mixed
      */
-    public function __invoke($value, ArrayAccess $item)
+    public function __invoke($value)
+    {
+    }
+
+    /**
+     * @param ArrayAccess $context
+     *
+     * @return void
+     */
+    public function setContext(ArrayAccess $context)
     {
     }
 }
