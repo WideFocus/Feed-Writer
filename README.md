@@ -13,11 +13,11 @@ $ composer require widefocus/feed-writer
 ## Usage
 
 This package is meant to be used as basis for feed writer implementations. To
-do so a writer and a writer layout need to be implemented.
+do so a writer needs to be implemented.
 
 ### Writer
 
-The writer processes feed data. It can use a writer layout.
+The writer processes feed data.
 
 ```php
 <?php
@@ -37,7 +37,7 @@ class DebugWriter extends AbstractWriter
     {
         foreach ($this->getFields() as $field) {
             echo sprintf(
-                $this->getLayout()->getItemFormat(),
+                "%s: %s\n",
                 $field->getLabel(),
                 $field->getValue($item)
             );
@@ -64,46 +64,6 @@ class DebugWriter extends AbstractWriter
 }
 ```
 
-### Writer Layout
-
-A writer layout contains information that is specific to a writer. For example
-for a CSV writer it would contain information about the file destination and
-the CSV control characters.
- 
-```php
-<?php
-
-use WideFocus\Feed\Writer\WriterLayoutInterface;
-
-class DebugWriterLayout implements WriterLayoutInterface
-{
-    /**
-     * @var string 
-     */
-    private $itemFormat;
-    
-    /**
-     * Constructor
-     * 
-     * @param string $itemFormat
-     */
-    public function __construct(string $itemFormat)
-    {
-        $this->itemFormat = $itemFormat;
-    }
-    
-    /**
-     * Get the item format
-     *
-     * @return string  
-     */
-    public function getItemFormat(): string
-    {
-        return $this->itemFormat;
-    }
-}
-```
-
 ### Writing the feed
 
 The writer expects an iterator as it's input. The iterator is expected to
@@ -126,9 +86,8 @@ $fields = [
     new WriterField('bar', 'Bar', 'strtoupper')
 ];
 
-$layout = new DebugWriterLayout("%s: %s\n");
-
-$writer = new DebugWriter($fields, $layout);
+$writer = new DebugWriter();
+$writer->setFields($fields);
 $writer->write($items);
 ```
 
