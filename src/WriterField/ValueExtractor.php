@@ -24,7 +24,7 @@ class ValueExtractor implements ValueExtractorInterface
     public function extract(array $fields, ArrayAccess $item): array
     {
         return array_map(
-            function (WriterFieldInterface $field) use ($item) {
+            function (WriterFieldInterface $field) use ($item): string {
                 return $field->getValue($item);
             },
             $fields

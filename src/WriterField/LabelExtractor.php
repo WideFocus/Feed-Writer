@@ -21,7 +21,7 @@ class LabelExtractor implements LabelExtractorInterface
     public function extract(array $fields): array
     {
         return array_map(
-            function (WriterFieldInterface $field) {
+            function (WriterFieldInterface $field): string {
                 return $field->getLabel();
             },
             $fields
