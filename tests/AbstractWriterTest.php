@@ -22,8 +22,8 @@ class AbstractWriterTest extends PHPUnit_Framework_TestCase
     /**
      * @return void
      *
-     * @covers ::setFields()
-     * @covers ::getFields()
+     * @covers ::setFields
+     * @covers ::getFields
      */
     public function testGetSetFields()
     {

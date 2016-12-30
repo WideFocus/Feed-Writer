@@ -9,7 +9,7 @@ namespace WideFocus\Feed\Writer\Tests;
 use ArrayAccess;
 use PHPUnit_Framework_MockObject_MockObject;
 use WideFocus\Feed\Writer\Tests\Stubs\FilterStub;
-use WideFocus\Feed\Writer\WriterFieldInterface;
+use WideFocus\Feed\Writer\WriterField\WriterFieldInterface;
 use WideFocus\Feed\Writer\WriterLayoutInterface;
 
 /**

@@ -4,14 +4,15 @@
  * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Tests;
+namespace WideFocus\Feed\Writer\Tests\WriterField;
 
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
-use WideFocus\Feed\Writer\WriterField;
+use WideFocus\Feed\Writer\Tests\CommonMocksTrait;
+use WideFocus\Feed\Writer\WriterField\WriterField;
 
 /**
- * @coversDefaultClass \WideFocus\Feed\Writer\WriterField
+ * @coversDefaultClass \WideFocus\Feed\Writer\WriterField\WriterField
  */
 class WriterFieldTest extends PHPUnit_Framework_TestCase
 {
