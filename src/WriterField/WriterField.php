@@ -4,7 +4,7 @@
  * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer;
+namespace WideFocus\Feed\Writer\WriterField;
 
 use ArrayAccess;
 use WideFocus\Filter\FilterInterface;
