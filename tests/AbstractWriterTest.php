@@ -6,6 +6,7 @@
 
 namespace WideFocus\Feed\Writer\Tests;
 
+use ArrayAccess;
 use ArrayIterator;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
@@ -16,28 +17,6 @@ use WideFocus\Feed\Writer\AbstractWriter;
  */
 class AbstractWriterTest extends PHPUnit_Framework_TestCase
 {
-    use CommonMocksTrait;
-    use ProtectedMethodTrait;
-
-    /**
-     * @return void
-     *
-     * @covers ::setFields
-     * @covers ::getFields
-     */
-    public function testGetSetFields()
-    {
-        $fields = [
-            $this->createWriterFieldMock()
-        ];
-
-        $writer = $this->createWriter();
-
-        $writer->setFields($fields);
-        $method = $this->getProtectedMethod(AbstractWriter::class, 'getFields');
-        $this->assertSame($fields, $method->invoke($writer));
-    }
-
     /**
      * @return void
      *
@@ -48,8 +27,8 @@ class AbstractWriterTest extends PHPUnit_Framework_TestCase
         $writer = $this->createWriter();
 
         $items = [
-            $this->createFeedItemMock(),
-            $this->createFeedItemMock()
+            $this->createMock(ArrayAccess::class),
+            $this->createMock(ArrayAccess::class)
         ];
 
         $writer->expects($this->once())
