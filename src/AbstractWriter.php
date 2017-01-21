@@ -8,17 +8,13 @@ namespace WideFocus\Feed\Writer;
 
 use ArrayAccess;
 use Iterator;
-use WideFocus\Feed\Writer\WriterField\WriterFieldInterface;
 
 /**
  * Writes a feed.
  */
 abstract class AbstractWriter implements WriterInterface
 {
-    /**
-     * @var WriterFieldInterface[]
-     */
-    private $fields = [];
+    use WriterTrait;
 
     /**
      * Write the feed.
@@ -34,31 +30,6 @@ abstract class AbstractWriter implements WriterInterface
             $this->writeItem($item);
         }
         $this->finish();
-
-        return $this;
-    }
-
-    /**
-     * Set the writer fields.
-     *
-     * @param WriterFieldInterface[] $fields
-     *
-     * @return WriterInterface
-     */
-    public function setFields(array $fields): WriterInterface
-    {
-        $this->fields = $fields;
-        return $this;
-    }
-
-    /**
-     * Get the fields.
-     *
-     * @return WriterFieldInterface[]
-     */
-    protected function getFields(): array
-    {
-        return $this->fields;
     }
 
     /**
