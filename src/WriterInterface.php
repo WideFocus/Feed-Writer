@@ -20,16 +20,16 @@ interface WriterInterface
      *
      * @param Iterator|ArrayAccess[] $dataIterator
      *
-     * @return WriterInterface
+     * @return void
      */
-    public function write(Iterator $dataIterator): WriterInterface;
+    public function write(Iterator $dataIterator);
 
     /**
      * Set the writer fields.
      *
      * @param WriterFieldInterface[] $fields
      *
-     * @return WriterInterface
+     * @return void
      */
-    public function setFields(array $fields): WriterInterface;
+    public function setFields(array $fields);
 }

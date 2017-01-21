@@ -3,6 +3,7 @@
  * Copyright WideFocus. All rights reserved.
  * http://www.widefocus.net
  */
+
 namespace WideFocus\Feed\Writer;
 
 use ArrayAccess;
@@ -24,9 +25,9 @@ abstract class AbstractWriter implements WriterInterface
      *
      * @param Iterator|ArrayAccess[] $dataIterator
      *
-     * @return WriterInterface
+     * @return void
      */
-    public function write(Iterator $dataIterator): WriterInterface
+    public function write(Iterator $dataIterator)
     {
         $this->initialize();
         foreach ($dataIterator as $item) {
