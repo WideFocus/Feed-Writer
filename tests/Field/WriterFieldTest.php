@@ -10,6 +10,7 @@ use ArrayAccess;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use WideFocus\Feed\Writer\Field\WriterField;
+use WideFocus\Filter\ContextAwareFilterInterface;
 use WideFocus\Filter\FilterInterface;
 
 /**
@@ -125,7 +126,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
             [
                 'another_name',
                 'another_label',
-                $this->createMock(FilterInterface::class)
+                $this->createMock(ContextAwareFilterInterface::class)
             ]
         ];
     }
