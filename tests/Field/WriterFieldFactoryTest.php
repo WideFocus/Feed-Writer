@@ -4,20 +4,18 @@
  * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Tests\WriterField;
+namespace WideFocus\Feed\Writer\Tests\Field;
 
 use PHPUnit_Framework_TestCase;
-use WideFocus\Feed\Writer\Tests\CommonMocksTrait;
-use WideFocus\Feed\Writer\WriterField\WriterFieldFactory;
-use WideFocus\Feed\Writer\WriterField\WriterFieldInterface;
+use WideFocus\Feed\Writer\Field\WriterFieldFactory;
+use WideFocus\Feed\Writer\Field\WriterFieldInterface;
+use WideFocus\Filter\FilterInterface;
 
 /**
- * @coversDefaultClass \WideFocus\Feed\Writer\WriterField\WriterFieldFactory
+ * @coversDefaultClass \WideFocus\Feed\Writer\Field\WriterFieldFactory
  */
 class WriterFieldFactoryTest extends PHPUnit_Framework_TestCase
 {
-    use CommonMocksTrait;
-
     /**
      * @param string   $name
      * @param string   $label
@@ -48,7 +46,7 @@ class WriterFieldFactoryTest extends PHPUnit_Framework_TestCase
             [
                 'another_name',
                 'another_label',
-                $this->createFilterMock()
+                $this->createMock(FilterInterface::class)
             ]
         ];
     }

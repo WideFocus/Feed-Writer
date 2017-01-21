@@ -4,20 +4,19 @@
  * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Tests\WriterField;
+namespace WideFocus\Feed\Writer\Tests\Field;
 
+use ArrayAccess;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
-use WideFocus\Feed\Writer\Tests\CommonMocksTrait;
-use WideFocus\Feed\Writer\WriterField\WriterField;
+use WideFocus\Feed\Writer\Field\WriterField;
+use WideFocus\Filter\FilterInterface;
 
 /**
- * @coversDefaultClass \WideFocus\Feed\Writer\WriterField\WriterField
+ * @coversDefaultClass \WideFocus\Feed\Writer\Field\WriterField
  */
 class WriterFieldTest extends PHPUnit_Framework_TestCase
 {
-    use CommonMocksTrait;
-
     /**
      * @param string   $name
      * @param string   $label
@@ -83,7 +82,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
 
         $value    = 'some_value';
         $filtered = 'some_filtered_value';
-        $item     = $this->createFeedItemMock();
+        $item     = $this->createMock(ArrayAccess::class);
 
         $item->expects($this->once())
             ->method('offsetExists')
@@ -126,7 +125,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
             [
                 'another_name',
                 'another_label',
-                $this->createFilterMock()
+                $this->createMock(FilterInterface::class)
             ]
         ];
     }

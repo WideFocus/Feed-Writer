@@ -4,22 +4,19 @@
  * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Tests\WriterField;
+namespace WideFocus\Feed\Writer\Tests\Field;
 
 use ArrayAccess;
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
-use WideFocus\Feed\Writer\Tests\CommonMocksTrait;
-use WideFocus\Feed\Writer\WriterField\ValueExtractor;
-use WideFocus\Feed\Writer\WriterField\WriterFieldInterface;
+use WideFocus\Feed\Writer\Field\ValueExtractor;
+use WideFocus\Feed\Writer\Field\WriterFieldInterface;
 
 /**
- * @coversDefaultClass \WideFocus\Feed\Writer\WriterField\ValueExtractor
+ * @coversDefaultClass \WideFocus\Feed\Writer\Field\ValueExtractor
  */
 class ValueExtractorTest extends PHPUnit_Framework_TestCase
 {
-    use CommonMocksTrait;
-
     /**
      * @param array       $fields
      * @param ArrayAccess $item
@@ -43,17 +40,17 @@ class ValueExtractorTest extends PHPUnit_Framework_TestCase
      */
     public function extractDataProvider(): array
     {
-        $item = $this->createFeedItemMock();
+        $item = $this->createMock(ArrayAccess::class);
         return [
             'filled' => [
                 [
                     $this->mockWriterField(
-                        $this->createWriterFieldMock(),
+                        $this->createMock(WriterFieldInterface::class),
                         $item,
                         'foo'
                     ),
                     $this->mockWriterField(
-                        $this->createWriterFieldMock(),
+                        $this->createMock(WriterFieldInterface::class),
                         $item,
                         'bar'
                     )

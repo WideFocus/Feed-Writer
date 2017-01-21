@@ -4,21 +4,18 @@
  * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Tests\WriterField;
+namespace WideFocus\Feed\Writer\Tests\Field;
 
 use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
-use WideFocus\Feed\Writer\Tests\CommonMocksTrait;
-use WideFocus\Feed\Writer\WriterField\LabelExtractor;
-use WideFocus\Feed\Writer\WriterField\WriterFieldInterface;
+use WideFocus\Feed\Writer\Field\LabelExtractor;
+use WideFocus\Feed\Writer\Field\WriterFieldInterface;
 
 /**
- * @coversDefaultClass \WideFocus\Feed\Writer\WriterField\LabelExtractor
+ * @coversDefaultClass \WideFocus\Feed\Writer\Field\LabelExtractor
  */
 class LabelExtractorTest extends PHPUnit_Framework_TestCase
 {
-    use CommonMocksTrait;
-
     /**
      * @param array $fields
      * @param array $expectedLabels
@@ -44,11 +41,11 @@ class LabelExtractorTest extends PHPUnit_Framework_TestCase
             'filled' => [
                 [
                     $this->mockWriterField(
-                        $this->createWriterFieldMock(),
+                        $this->createMock(WriterFieldInterface::class),
                         'Foo'
                     ),
                     $this->mockWriterField(
-                        $this->createWriterFieldMock(),
+                        $this->createMock(WriterFieldInterface::class),
                         'Bar'
                     )
                 ],
