@@ -7,7 +7,7 @@
 namespace WideFocus\Feed\Writer\Field;
 
 use ArrayAccess;
-use WideFocus\Filter\FilterInterface;
+use WideFocus\Filter\ContextAwareFilterInterface;
 
 /**
  * Gets a filtered field value from a feed item.
@@ -77,7 +77,7 @@ class WriterField implements WriterFieldInterface
             : '';
 
         if (is_callable($this->filter)) {
-            if ($this->filter instanceof FilterInterface) {
+            if ($this->filter instanceof ContextAwareFilterInterface) {
                 $this->filter->setContext(clone $item);
             }
 
