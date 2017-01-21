@@ -4,12 +4,12 @@
  * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\WriterField;
+namespace WideFocus\Feed\Writer\Field;
 
 /**
  * Creates writer fields.
  */
-interface WriterFieldFactoryInterface
+class WriterFieldFactory implements WriterFieldFactoryInterface
 {
     /**
      * Create a writer field.
@@ -24,5 +24,7 @@ interface WriterFieldFactoryInterface
         string $name,
         string $label,
         callable $filter = null
-    ): WriterFieldInterface;
+    ): WriterFieldInterface {
+        return new WriterField($name, $label, $filter);
+    }
 }

@@ -4,7 +4,7 @@
  * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\WriterField;
+namespace WideFocus\Feed\Writer\Field;
 
 /**
  * Extracts labels from fields.

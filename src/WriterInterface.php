@@ -8,6 +8,7 @@ namespace WideFocus\Feed\Writer;
 
 use ArrayAccess;
 use Iterator;
+use WideFocus\Feed\Writer\Field\WriterFieldInterface;
 
 /**
  * Writes a feed.
