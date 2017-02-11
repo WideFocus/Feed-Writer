@@ -11,7 +11,6 @@ use PHPUnit_Framework_MockObject_MockObject;
 use PHPUnit_Framework_TestCase;
 use WideFocus\Feed\Writer\Field\WriterField;
 use WideFocus\Filter\ContextAwareFilterInterface;
-use WideFocus\Filter\FilterInterface;
 
 /**
  * @coversDefaultClass \WideFocus\Feed\Writer\Field\WriterField
