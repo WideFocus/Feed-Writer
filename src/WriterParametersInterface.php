@@ -6,9 +6,11 @@
 
 namespace WideFocus\Feed\Writer;
 
+use WideFocus\Parameters\ParameterBagInterface;
+
 /**
  * Contains the layout used by a writer.
  */
-interface WriterLayoutInterface
+interface WriterParametersInterface extends ParameterBagInterface
 {
 }

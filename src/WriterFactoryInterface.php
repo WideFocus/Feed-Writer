@@ -6,6 +6,8 @@
 
 namespace WideFocus\Feed\Writer;
 
+use WideFocus\Feed\Writer\Field\WriterFieldInterface;
+
 /**
  * Creates writers.
  */
@@ -14,13 +16,13 @@ interface WriterFactoryInterface
     /**
      * Create a writer.
      *
-     * @param WriterFieldInterface[] $fields
-     * @param WriterLayoutInterface  $layout
+     * @param WriterFieldInterface[]    $fields
+     * @param WriterParametersInterface $parameters
      *
      * @return WriterInterface
      */
     public function createWriter(
         array $fields,
-        WriterLayoutInterface $layout
+        WriterParametersInterface $parameters
     ): WriterInterface;
 }
