@@ -1,5 +1,9 @@
 # WideFocus Feed Writer
 
+[![Build Status](https://travis-ci.org/WideFocus/Feed-Writer.svg?branch=master)](https://travis-ci.org/WideFocus/Feed-Writer)
+[![Latest Stable Version](https://poser.pugx.org/widefocus/feed-writer/v/stable)](https://packagist.org/packages/widefocus/feed-writer)
+[![License](https://poser.pugx.org/widefocus/feed-writer/license)](https://packagist.org/packages/widefocus/feed-writer)
+
 This package contains models to write a feed.
 
 ## Installation
