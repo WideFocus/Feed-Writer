@@ -1,17 +1,12 @@
 <?php
 /**
- * Copyright WideFocus. See LICENSE.txt.
- * https://www.widefocus.net
+ * Copyright WideFocus. All rights reserved.
+ * http://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Extractor;
+namespace WideFocus\Feed\Writer;
 
-use WideFocus\Feed\Writer\WriterFieldInterface;
-
-/**
- * Extracts labels from fields.
- */
-class LabelExtractor implements LabelExtractorInterface
+trait ExtractFieldLabelsTrait
 {
     /**
      * Extract labels from fields.
@@ -20,8 +15,9 @@ class LabelExtractor implements LabelExtractorInterface
      *
      * @return string[]
      */
-    public function extract(WriterFieldInterface ...$fields): array
-    {
+    protected function extractFieldLabels(
+        WriterFieldInterface ...$fields
+    ): array {
         return array_map(
             function (WriterFieldInterface $field) : string {
                 return $field->getLabel();
