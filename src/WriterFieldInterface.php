@@ -4,7 +4,7 @@
  * https://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Field;
+namespace WideFocus\Feed\Writer;
 
 use ArrayAccess;
 
