@@ -26,10 +26,29 @@ The writer processes feed data.
 ```php
 <?php
 
-use WideFocus\Feed\Writer\AbstractWriter;
+use WideFocus\Feed\Writer\WriterInterface;
+use WideFocus\Feed\Writer\WriterFieldInterface;
+use WideFocus\Feed\Writer\WriterTrait;
 
-class DebugWriter extends AbstractWriter
+class DebugWriter implements WriterInterface
 {
+    use WriterTrait;
+
+    /**
+     * @var WriterFieldInterface[]
+     */
+    private $fields;
+
+    /**
+     * Constructor.
+     *
+     * @param WriterFieldInterface[] $fields
+     */
+    public function __construct(array $fields)
+    {
+        $this->fields = $fields;
+    }
+
     /**
      * Write an item to the feed.
      *
@@ -39,7 +58,7 @@ class DebugWriter extends AbstractWriter
      */
     protected function writeItem(ArrayAccess $item)
     {
-        foreach ($this->getFields() as $field) {
+        foreach ($this->fields as $field) {
             echo sprintf(
                 "%s: %s\n",
                 $field->getLabel(),
@@ -47,16 +66,16 @@ class DebugWriter extends AbstractWriter
             );
         }
     }
-    
+
     /**
      * Initialize the feed.
      *
      * @return void
      */
-    protected function initialize() 
+    protected function initialize()
     {
     }
-    
+
     /**
      * Finish the feed.
      *
@@ -64,7 +83,7 @@ class DebugWriter extends AbstractWriter
      */
     protected function finish()
     {
-    }   
+    }
 }
 ```
 
@@ -90,8 +109,7 @@ $fields = [
     new WriterField('bar', 'Bar', 'strtoupper')
 ];
 
-$writer = new DebugWriter();
-$writer->setFields($fields);
+$writer = new DebugWriter($fields);
 $writer->write($items);
 ```
 
