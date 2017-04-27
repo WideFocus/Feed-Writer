@@ -4,9 +4,10 @@
  * https://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Field;
+namespace WideFocus\Feed\Writer\Extractor;
 
 use ArrayAccess;
+use WideFocus\Feed\Writer\WriterFieldInterface;
 
 /**
  * Extracts labels from fields.
@@ -16,15 +17,15 @@ class ValueExtractor implements ValueExtractorInterface
     /**
      * Extract item values from fields.
      *
-     * @param WriterFieldInterface[] $fields
      * @param ArrayAccess            $item
+     * @param WriterFieldInterface[] ...$fields
      *
      * @return string[]
      */
-    public function extract(array $fields, ArrayAccess $item): array
+    public function extract(ArrayAccess $item, WriterFieldInterface ...$fields): array
     {
         return array_map(
-            function (WriterFieldInterface $field) use ($item): string {
+            function (WriterFieldInterface $field) use ($item) : string {
                 return $field->getValue($item);
             },
             $fields

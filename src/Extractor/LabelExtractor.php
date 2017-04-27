@@ -4,7 +4,9 @@
  * https://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Field;
+namespace WideFocus\Feed\Writer\Extractor;
+
+use WideFocus\Feed\Writer\WriterFieldInterface;
 
 /**
  * Extracts labels from fields.
@@ -14,14 +16,14 @@ class LabelExtractor implements LabelExtractorInterface
     /**
      * Extract labels from fields.
      *
-     * @param WriterFieldInterface[] $fields
+     * @param WriterFieldInterface[] ...$fields
      *
      * @return string[]
      */
-    public function extract(array $fields): array
+    public function extract(WriterFieldInterface ...$fields): array
     {
         return array_map(
-            function (WriterFieldInterface $field): string {
+            function (WriterFieldInterface $field) : string {
                 return $field->getLabel();
             },
             $fields
