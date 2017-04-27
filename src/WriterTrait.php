@@ -6,37 +6,50 @@
 
 namespace WideFocus\Feed\Writer;
 
-use WideFocus\Feed\Writer\Field\WriterFieldInterface;
+use ArrayAccess;
+use Iterator;
 
 /**
- * Implements WriterInterface.
+ * Implements WriterInterface
  */
 trait WriterTrait
 {
     /**
-     * @var WriterFieldInterface[]
-     */
-    private $fields;
-
-    /**
-     * Set the writer fields.
+     * Write the feed.
      *
-     * @param WriterFieldInterface[] $fields
+     * @param Iterator|ArrayAccess[] $dataIterator
      *
      * @return void
      */
-    public function setFields(array $fields)
+    public function write(Iterator $dataIterator)
     {
-        $this->fields = $fields;
+        $this->initialize();
+        foreach ($dataIterator as $item) {
+            $this->writeItem($item);
+        }
+        $this->finish();
     }
 
     /**
-     * Get the writer fields.
+     * Initialize the feed.
      *
-     * @return WriterFieldInterface[]
+     * @return void
      */
-    protected function getFields(): array
-    {
-        return $this->fields;
-    }
+    abstract protected function initialize();
+
+    /**
+     * Write an item to the feed.
+     *
+     * @param ArrayAccess $item
+     *
+     * @return void
+     */
+    abstract protected function writeItem(ArrayAccess $item);
+
+    /**
+     * Finish the feed.
+     *
+     * @return void
+     */
+    abstract protected function finish();
 }
