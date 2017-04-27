@@ -36,8 +36,11 @@ class WriterField implements WriterFieldInterface
      * @param string   $label
      * @param callable $filter
      */
-    public function __construct(string $name, string $label, callable $filter = null)
-    {
+    public function __construct(
+        string $name,
+        string $label,
+        callable $filter = null
+    ) {
         $this->name   = $name;
         $this->label  = $label;
         $this->filter = $filter;

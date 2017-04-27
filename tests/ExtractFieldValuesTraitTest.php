@@ -4,35 +4,45 @@
  * https://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Tests\Field;
+namespace WideFocus\Feed\Writer\Tests;
 
 use ArrayAccess;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
-use WideFocus\Feed\Writer\Field\ValueExtractor;
-use WideFocus\Feed\Writer\Field\WriterFieldInterface;
+use ReflectionMethod;
+use WideFocus\Feed\Writer\Tests\TestDouble\ExtractorDouble;
+use WideFocus\Feed\Writer\WriterFieldInterface;
 
 /**
- * @coversDefaultClass \WideFocus\Feed\Writer\Field\ValueExtractor
+ * @coversDefaultClass \WideFocus\Feed\Writer\ExtractFieldValuesTrait
  */
-class ValueExtractorTest extends PHPUnit_Framework_TestCase
+class ExtractFieldValuesTraitTest extends TestCase
 {
     /**
      * @param array       $fields
      * @param ArrayAccess $item
-     * @param array       $expectedLabels
+     * @param array       $expectedValues
      *
      * @return void
      *
      * @dataProvider extractDataProvider
      *
-     * @covers ::extract
+     * @covers ::extractFieldValues
      */
-    public function testExtract(array $fields, ArrayAccess $item, array $expectedLabels)
+    public function testExtract(array $fields, ArrayAccess $item, array $expectedValues)
     {
-        $extractor = new ValueExtractor();
+        $extractor = new ExtractorDouble();
 
-        $this->assertEquals($expectedLabels, $extractor->extract($fields, $item));
+        $method = new ReflectionMethod(
+            ExtractorDouble::class,
+            'extractFieldValues'
+        );
+        $method->setAccessible(true);
+
+        $this->assertEquals(
+            $expectedValues,
+            $method->invoke($extractor, $item, ...$fields)
+        );
     }
 
     /**
@@ -45,12 +55,10 @@ class ValueExtractorTest extends PHPUnit_Framework_TestCase
             'filled' => [
                 [
                     $this->mockWriterField(
-                        $this->createMock(WriterFieldInterface::class),
                         $item,
                         'foo'
                     ),
                     $this->mockWriterField(
-                        $this->createMock(WriterFieldInterface::class),
                         $item,
                         'bar'
                     )
@@ -70,18 +78,19 @@ class ValueExtractorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param WriterFieldInterface|PHPUnit_Framework_MockObject_MockObject $writerField
-     * @param ArrayAccess                                                  $item
-     * @param string                                                       $value
+     * @param ArrayAccess $item
+     * @param string      $value
      *
-     * @return WriterFieldInterface
+     * @return PHPUnit_Framework_MockObject_MockObject|WriterFieldInterface
      */
     protected function mockWriterField(
-        WriterFieldInterface $writerField,
         ArrayAccess $item,
         string $value
-    ): WriterFieldInterface {
-        $writerField->expects($this->any())
+    ) {
+        $writerField = $this->createMock(WriterFieldInterface::class);
+
+        $writerField
+            ->expects($this->any())
             ->method('getValue')
             ->with($item)
             ->willReturn($value);

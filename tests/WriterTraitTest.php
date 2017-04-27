@@ -6,30 +6,45 @@
 
 namespace WideFocus\Feed\Writer\Tests;
 
-use PHPUnit_Framework_TestCase;
-use WideFocus\Feed\Writer\Field\WriterFieldInterface;
-use WideFocus\Feed\Writer\Tests\TestDouble\WriterDouble;
+use ArrayAccess;
+use ArrayIterator;
+use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
+use WideFocus\Feed\Writer\WriterInterface;
+use WideFocus\Feed\Writer\WriterTrait;
 
 /**
  * @coversDefaultClass \WideFocus\Feed\Writer\WriterTrait
  */
-class WriterTraitTest extends PHPUnit_Framework_TestCase
+class WriterTraitTest extends TestCase
 {
     /**
      * @return void
      *
-     * @covers ::setFields
-     * @covers ::getFields
+     * @covers ::write
      */
-    public function testGetSetFields()
+    public function testWrite()
     {
-        $fields = [
-            $this->createMock(WriterFieldInterface::class)
+        /** @var WriterInterface|PHPUnit_Framework_MockObject_MockObject $writer */
+        $writer = $this->getMockForTrait(WriterTrait::class);
+
+        $items = [
+            $this->createMock(ArrayAccess::class),
+            $this->createMock(ArrayAccess::class)
         ];
 
-        $writer = new WriterDouble();
+        $writer->expects($this->once())
+            ->method('initialize');
 
-        $writer->setFields($fields);
-        $this->assertSame($fields, $writer->peekFields());
+        foreach ($items as $key => $item) {
+            $writer->expects($this->at($key + 1))
+                ->method('writeItem')
+                ->with($item);
+        }
+
+        $writer->expects($this->once())
+            ->method('finish');
+
+        $writer->write(new ArrayIterator($items));
     }
 }

@@ -4,33 +4,31 @@
  * https://www.widefocus.net
  */
 
-namespace WideFocus\Feed\Writer\Tests\Field;
+namespace WideFocus\Feed\Writer\Tests;
 
 use ArrayAccess;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
-use WideFocus\Feed\Writer\Field\WriterField;
+use WideFocus\Feed\Writer\WriterField;
 use WideFocus\Filter\ContextAwareFilterInterface;
+use WideFocus\Filter\FilterInterface;
 
 /**
- * @coversDefaultClass \WideFocus\Feed\Writer\Field\WriterField
+ * @coversDefaultClass \WideFocus\Feed\Writer\WriterField
  */
-class WriterFieldTest extends PHPUnit_Framework_TestCase
+class WriterFieldTest extends TestCase
 {
     /**
-     * @param string   $name
-     * @param string   $label
-     * @param callable $filter
-     *
-     * @return WriterField
-     *
-     * @dataProvider constructorDataProvider
+     * @return void
      *
      * @covers ::__construct
      */
-    public function testConstructor(string $name, string $label, callable $filter = null): WriterField
+    public function testConstructor()
     {
-        return new WriterField($name, $label, $filter);
+        $this->assertInstanceOf(
+            WriterField::class,
+            new WriterField('foo', 'bar')
+        );
     }
 
     /**
@@ -39,7 +37,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      *
-     * @dataProvider constructorDataProvider
+     * @dataProvider dataProvider
      *
      * @covers ::getName
      */
@@ -55,7 +53,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      *
-     * @dataProvider constructorDataProvider
+     * @dataProvider dataProvider
      *
      * @covers ::getLabel
      */
@@ -72,7 +70,7 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
      *
      * @return void
      *
-     * @dataProvider constructorDataProvider
+     * @dataProvider dataProvider
      *
      * @covers ::getValue
      */
@@ -94,11 +92,13 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
             ->with($name)
             ->willReturn($value);
 
-        if ($filter !== null) {
+        if ($filter instanceof ContextAwareFilterInterface) {
             $filter->expects($this->once())
                 ->method('setContext')
                 ->with($item);
+        }
 
+        if ($filter !== null) {
             $filter->expects($this->once())
                 ->method('__invoke')
                 ->with($value)
@@ -115,16 +115,21 @@ class WriterFieldTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function constructorDataProvider(): array
+    public function dataProvider(): array
     {
         return [
             [
-                'name',
-                'label'
+                'foo_name',
+                'foo_label'
             ],
             [
-                'another_name',
-                'another_label',
+                'bar_name',
+                'bar_label',
+                $this->createMock(FilterInterface::class)
+            ],
+            [
+                'baz_name',
+                'baz_label',
                 $this->createMock(ContextAwareFilterInterface::class)
             ]
         ];
